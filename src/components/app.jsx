@@ -1,8 +1,8 @@
 import React from "react";
-import {WelcomeScreen} from "./welcome-screen.jsx";
+import WelcomeScreen from "./welcome-screen.jsx";
+import PropTypes from 'prop-types';
 
-export const App = (props) => {
-  // eslint-disable-next-line react/prop-types
+const App = (props) => {
   const {gameTime, errorCount} = props;
 
   return <WelcomeScreen
@@ -10,3 +10,11 @@ export const App = (props) => {
     errorCount = {errorCount}
   />;
 };
+
+App.propTypes = {
+  gameTime: PropTypes.number.isRequired,
+  errorCount: PropTypes.number.isRequired
+};
+
+export default App;
+
