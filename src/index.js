@@ -1,18 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./components/app.jsx";
+import App from "./components/app/app.jsx";
 
 const ROOT_ELEMENT = document.getElementById(`root`);
 
-const settings = {
-  gameTime: 5,
-  errorCount: 3,
+const Settings = {
+  GAME_TIME: 5,
+  ERRORS_COUNT: 3,
 };
 
 ReactDOM.render(
     <App
-      errorCount = {settings.errorCount}
-      gameTime = {settings.gameTime}
+      gameTime = {Settings.GAME_TIME}
+      errorsCount = {Settings.ERRORS_COUNT}
     />, ROOT_ELEMENT
 );
