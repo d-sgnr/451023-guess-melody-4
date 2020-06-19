@@ -2,17 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import App from "./components/app/app.jsx";
+import questions from "./mocks/questions.js";
+import settings from "./mocks/settings.js";
 
 const ROOT_ELEMENT = document.getElementById(`root`);
 
-const Settings = {
-  GAME_TIME: 5,
-  ERRORS_COUNT: 3,
-};
-
 ReactDOM.render(
     <App
-      gameTime = {Settings.GAME_TIME}
-      errorsCount = {Settings.ERRORS_COUNT}
+      gameTime = {settings.GAME_TIME}
+      errorsCount = {settings.ERRORS_COUNT}
+      questions = {questions}
     />, ROOT_ELEMENT
 );
