@@ -38,7 +38,7 @@ const questions = [
   },
 ];
 
-it(`App should be rendered correctly`, () => {
+it(`App is rendered correctly`, () => {
   const tree = renderer
     .create(<App
       gameTime = {5}

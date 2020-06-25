@@ -1,23 +1,24 @@
 const AVATAR_URL = `https://api.adorable.io/avatars/128`;
+const AUDIO_URL = `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`;
 
 export default [
   {
     type: `genre`,
     genre: `rock`,
     answers: [{
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: AUDIO_URL,
       genre: `rock`,
     },
     {
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: AUDIO_URL,
       genre: `blues`,
     },
     {
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: AUDIO_URL,
       genre: `blues`,
     },
     {
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: AUDIO_URL,
       genre: `blues`,
     }],
   },
@@ -25,18 +26,18 @@ export default [
     type: `artist`,
     song: {
       artist: `Jim Bean`,
-      src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
+      src: AUDIO_URL,
     },
     answers: [{
-      artist: `Jim Bean`,
+      artist: `John Snow`,
       picture: AVATAR_URL,
     },
     {
-      artist: `Jim Bean`,
+      artist: `Jack Sparrow`,
       picture: AVATAR_URL,
     },
     {
-      artist: `Jim Bean`,
+      artist: `Jeremih Paul`,
       picture: AVATAR_URL,
     }],
   }

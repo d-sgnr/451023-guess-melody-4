@@ -1,6 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
-import ArtistQuestionScreen from "./artist-question-screen.jsx";
+import React from 'react';
+import renderer from 'react-test-renderer';
+import ArtistQuestionScreen from './artist-question-screen.jsx';
+
 
 const question = {
   type: `artist`,
@@ -20,12 +21,18 @@ const question = {
   }],
 };
 
-it(`ArtistQuestionScreen should be rendered correctly`, () => {
+it(`ArtistQuestionScreen is rendered correctly`, () => {
   const tree = renderer.create(
       <ArtistQuestionScreen
         question={question}
         onAnswer={() => {}}
-      />).toJSON();
+        renderPlayer={() => {}}
+      />, {
+        createNodeMock: () => {
+          return {};
+        }
+      }
+  ).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
