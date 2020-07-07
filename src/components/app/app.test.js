@@ -24,7 +24,8 @@ const questions = [
       src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       genre: `rock`,
     }],
-  }, {
+  },
+  {
     type: `artist`,
     song: {
       artist: `Jim Beam`,

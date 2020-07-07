@@ -38,7 +38,7 @@ export default [
     },
     {
       artist: `Jeremih Paul`,
-      picture: `${AVATAR_URL}/AC`,
+      picture: `${AVATAR_URL}/AC `,
     }],
   }
 ];

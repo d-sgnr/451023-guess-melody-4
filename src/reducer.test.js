@@ -30,12 +30,85 @@ const questions = [
       picture: `https://api.adorable.io/avatars/128/AB`,
       artist: `Jack Sparrow`,
     }, {
-      picture: `https://api.adorable.io/avatars/128/AC`,
+      picture: `https://api.adorable.io/avatars/128/AC `,
       artist: `Jeremih Paul`,
     }],
   },
 ];
 
+const mockArtistQuestion = {
+  type: `artist`,
+  song: {
+    artist: `correct`,
+    src: ``,
+  },
+  answers: [
+    {
+      artist: `correct`,
+      picture: ``,
+    }, {
+      artist: `incorrect`,
+      picture: ``,
+    }, {
+      artist: `incorrect-2`,
+      picture: ``,
+    },
+  ]
+};
+
+const mockGenreQuestionCorrect = {
+  type: `genre`,
+  genre: `jazz`,
+  answers: [
+    {
+      genre: `rock`,
+      src: ``,
+    }, {
+      genre: `jazz`,
+      src: ``,
+    }, {
+      genre: `blues`,
+      src: ``,
+    }, {
+      genre: `blues`,
+      src: ``,
+    },
+  ]
+};
+
+const mockGenreQuestionIncorrect = {
+  type: `genre`,
+  genre: `jazz`,
+  answers: [
+    {
+      genre: `blues`,
+      src: ``,
+    }, {
+      genre: `blues`,
+      src: ``,
+    }, {
+      genre: `blues`,
+      src: ``,
+    }, {
+      genre: `blues`,
+      src: ``,
+    },
+  ]
+};
+
+const mockArtistIncorrectAnswer = {
+  artist: `incorrect`,
+  picture: ``,
+};
+
+const mockArtistCorrectAnswer = {
+  artist: `correct`,
+  picture: ``,
+};
+
+const mockGenreAnswerIncorrect = [true, true, true, true];
+
+const mockGenreAnswerCorrect = [false, true, false, false];
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
@@ -75,141 +148,73 @@ it(`Reducer should increment current step by a given value`, () => {
   });
 });
 
-it(`Reducer should increment number of mistakes by a given value`, () => {
+it(`Reducer should increment number of mistakes if answer for artist is incorrect`, () => {
   expect(reducer({
     step: -1,
     mistakes: 0,
   }, {
     type: ActionType.INCREMENT_MISTAKES,
-    payload: 1,
+    payload: {
+      question: mockArtistQuestion,
+      userAnswer: mockArtistIncorrectAnswer,
+    },
   })).toEqual({
     step: -1,
     mistakes: 1,
   });
+});
 
+it(`Reducer should not increment number of mistakes if answer for artist is correct`, () => {
   expect(reducer({
     step: -1,
     mistakes: 0,
   }, {
     type: ActionType.INCREMENT_MISTAKES,
-    payload: 0,
+    payload: {
+      question: mockArtistQuestion,
+      userAnswer: mockArtistCorrectAnswer,
+    },
   })).toEqual({
     step: -1,
     mistakes: 0,
   });
 });
 
-describe(`Action creators work correctly`, () => {
-  it(`Action creator for incrementing step returns correct action`, () => {
-    expect(ActionCreator.incrementStep()).toEqual({
-      type: ActionType.INCREMENT_STEP,
-      payload: 1,
-    });
+it(`Reducer should increment number of mistakes if answer for genre is incorrect`, () => {
+  expect(reducer({
+    step: -1,
+    mistakes: 0,
+  }, {
+    type: ActionType.INCREMENT_MISTAKES,
+    payload: {
+      question: mockGenreQuestionIncorrect,
+      userAnswer: mockGenreAnswerIncorrect,
+    },
+  })).toEqual({
+    step: -1,
+    mistakes: 1,
   });
+});
 
-  it(`Action creator for incrementing mistake returns action with 0 payload if answer for artist is correct`, () => {
-    expect(ActionCreator.incrementMistake({
-      type: `artist`,
-      song: {
-        artist: `correct`,
-        src: ``,
-      },
-      answers: [
-        {
-          artist: `correct`,
-          picture: ``,
-        }, {
-          artist: `incorrect`,
-          picture: ``,
-        }, {
-          artist: `incorrect-2`,
-          picture: ``,
-        },
-      ]
-    }, {
-      artist: `correct`,
-      picture: ``,
-    })).toEqual({
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 0,
-    });
+it(`Reducer should not increment number of mistakes if answer for genre is correct`, () => {
+  expect(reducer({
+    step: -1,
+    mistakes: 0,
+  }, {
+    type: ActionType.INCREMENT_MISTAKES,
+    payload: {
+      question: mockGenreQuestionCorrect,
+      userAnswer: mockGenreAnswerCorrect,
+    },
+  })).toEqual({
+    step: -1,
+    mistakes: 0,
   });
+});
 
-  it(`Action creator for incrementing mistake returns action with 1 payload if answer for artist is incorrect`, () => {
-    expect(ActionCreator.incrementMistake({
-      type: `artist`,
-      song: {
-        artist: `correct`,
-        src: ``,
-      },
-      answers: [
-        {
-          artist: `correct`,
-          picture: ``,
-        }, {
-          artist: `incorrect`,
-          picture: ``,
-        }, {
-          artist: `incorrect-2`,
-          picture: ``,
-        },
-      ]
-    }, {
-      artist: `incorrect`,
-      picture: ``,
-    })).toEqual({
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 1,
-    });
-  });
-
-  it(`Action creator for incrementing mistake returns action with 0 payload if answer for genre is correct`, () => {
-    expect(ActionCreator.incrementMistake({
-      type: `genre`,
-      genre: `jazz`,
-      answers: [
-        {
-          genre: `rock`,
-          src: ``,
-        }, {
-          genre: `jazz`,
-          src: ``,
-        }, {
-          genre: `blues`,
-          src: ``,
-        }, {
-          genre: `blues`,
-          src: ``,
-        },
-      ]
-    }, [false, true, false, false])).toEqual({
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 0,
-    });
-  });
-
-  it(`Action creator for incrementing mistake returns action with 1 payload if answer for genre is incorrect`, () => {
-    expect(ActionCreator.incrementMistake({
-      type: `genre`,
-      genre: `jazz`,
-      answers: [
-        {
-          genre: `blues`,
-          src: ``,
-        }, {
-          genre: `blues`,
-          src: ``,
-        }, {
-          genre: `blues`,
-          src: ``,
-        }, {
-          genre: `blues`,
-          src: ``,
-        },
-      ]
-    }, [true, true, true, true])).toEqual({
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: 1,
-    });
+it(`Action creator for incrementing step returns correct action`, () => {
+  expect(ActionCreator.incrementStep()).toEqual({
+    type: ActionType.INCREMENT_STEP,
+    payload: 1,
   });
 });
