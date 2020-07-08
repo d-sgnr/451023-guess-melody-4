@@ -1,6 +1,11 @@
+
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import {App} from "./app.jsx";
+
+const mockStore = configureStore([]);
 
 const questions = [
   {
@@ -19,7 +24,8 @@ const questions = [
       src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
       genre: `rock`,
     }],
-  }, {
+  },
+  {
     type: `artist`,
     song: {
       artist: `Jim Beam`,
@@ -38,14 +44,79 @@ const questions = [
   },
 ];
 
-it(`App is rendered correctly`, () => {
-  const tree = renderer
-    .create(<App
-      gameTime = {5}
-      errorsCount = {3}
-      questions = {questions}
-    />)
-    .toJSON();
+describe(`Render App`, () => {
+  it(`Render WelcomeScreen`, () => {
+    const store = mockStore({
+      mistakes: 0,
+    });
 
-  expect(tree).toMatchSnapshot();
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              gameTime={5}
+              maxMistakes={3}
+              questions={questions}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              step={-1}
+            />
+          </Provider>
+      )
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render GenreQuestionScreen`, () => {
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              gameTime={5}
+              maxMistakes={3}
+              questions={questions}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              step={0}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          })
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`Render ArtistQuestionScreen`, () => {
+    const store = mockStore({
+      mistakes: 3,
+    });
+
+    const tree = renderer
+      .create(
+          <Provider store={store}>
+            <App
+              gameTime={5}
+              maxMistakes={3}
+              questions={questions}
+              onUserAnswer={() => {}}
+              onWelcomeButtonClick={() => {}}
+              step={1}
+            />
+          </Provider>, {
+            createNodeMock: () => {
+              return {};
+            }
+          })
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

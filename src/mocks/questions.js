@@ -30,15 +30,15 @@ export default [
     },
     answers: [{
       artist: `John Snow`,
-      picture: AVATAR_URL,
+      picture: `${AVATAR_URL}/A`,
     },
     {
       artist: `Jack Sparrow`,
-      picture: AVATAR_URL,
+      picture: `${AVATAR_URL}/AB`,
     },
     {
       artist: `Jeremih Paul`,
-      picture: AVATAR_URL,
+      picture: `${AVATAR_URL}/AC `,
     }],
   }
 ];
